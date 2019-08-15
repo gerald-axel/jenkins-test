@@ -2,7 +2,7 @@ pipeline {
   agent {
     kubernetes {
       label 'kubernetes'
-      cloud 'kubernetes'
+      cloud 'cicd-eks-demo'
     }
   }
   stages {
