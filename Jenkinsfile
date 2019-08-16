@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     checkout scm 
-                    sh "docker build --no-cache -t ${ecrRepo}:${env.BUILD_ID} ." 
+                    sh "docker build -t ${ecrRepo}:${env.BUILD_ID} ." 
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
             	script {
 	                withKubeConfig([credentialsId: 'EKS', serverUrl: eksCluster]) {
-                      sh "kubectl run test-${env.BUILD_ID} --image=${ecrRepo}/ci-cd-demo:${env.BUILD_ID} --replicas=1"
+                      sh "kubectl run test-${env.BUILD_ID} --image=${ecrRepo}:${env.BUILD_ID} --replicas=1"
 	                }
                  }
             }
