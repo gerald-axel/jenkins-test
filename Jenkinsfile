@@ -1,14 +1,15 @@
-ecrRegistry = "174863393238.dkr.ecr.us-west-2.amazonaws.com"
+ecrRegistry = "https://174863393238.dkr.ecr.us-west-2.amazonaws.com"
+ecrRepo = "174863393238.dkr.ecr.us-west-2.amazonaws.com/ci-cd-demo"
 eksCluster = "https://74A99A33DEC6AE680D631929F926AFAE.sk1.us-west-2.eks.amazonaws.com"
 
 pipeline {
-	agent any
+    agent any
     stages {
         stage('Build & Run Unit test') {
             steps {
-            	script {
-            		checkout scm 
-	                sh "docker build -t ${ecrRegistry}/ci-cd-demo:${env.BUILD_ID} ." 
+                script {
+                    checkout scm 
+                    sh "docker build --no-cache -t ${ecrRepo}:${env.BUILD_ID} ." 
                 }
             }
         }
@@ -16,7 +17,7 @@ pipeline {
 	      steps {
 	      		script {
 			        withDockerRegistry([ credentialsId: "ECR", url: ecrRegistry ]) {
-			          sh "docker push ${ecrRegistry}/ci-cd-demo:${env.BUILD_ID}"
+			          sh "docker push ${ecrRepo}:${env.BUILD_ID}"
 			        }
 	      		}
 	        }
@@ -25,7 +26,7 @@ pipeline {
             steps {
             	script {
 	                withKubeConfig([credentialsId: 'EKS', serverUrl: eksCluster]) {
-                      sh "kubectl run test --image=${eksCluster}/ci-cd-demo:${env.BUILD_ID} --replicas=1"
+                      sh "kubectl run test-${env.BUILD_ID} --image=${ecrRepo}/ci-cd-demo:${env.BUILD_ID} --replicas=1"
 	                }
                  }
             }
