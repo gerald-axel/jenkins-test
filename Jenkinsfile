@@ -5,11 +5,19 @@ eksCluster = "https://74A99A33DEC6AE680D631929F926AFAE.sk1.us-west-2.eks.amazona
 pipeline {
     agent any
     stages {
-        stage('Build & Run Unit test') {
+        stage('Build Image') {
             steps {
                 script {
                     checkout scm 
                     sh "docker build --no-cache -t ${ecrRepo}:${env.BUILD_ID} ." 
+                }
+            }
+        }
+        stage('Run Unit test') {
+            steps {
+                script {
+                    checkout scm 
+                    sh "docker run ${ecrRepo}:${env.BUILD_ID} mvn surefire:test" 
                 }
             }
         }
