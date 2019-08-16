@@ -3,4 +3,4 @@ COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/
 RUN mvn package
-CMD ["mvn test"]
+CMD ["mvn", "test"]
