@@ -21,25 +21,20 @@ pipeline {
         }
     }
     stages {
-        stage('Build Image') {
+        stage('Build Image & Run Tests') {
             steps {
                 container('docker') {
-                    sh "docker build -t ${ecrRepo}:${env.BUILD_ID} ." 
-                }
-            }
-        }
-        stage('Run Unit test') {
-            steps {
-                container('docker') {
-                    sh "docker run ${ecrRepo}:${env.BUILD_ID} mvn surefire:test" 
+                    sh "docker build -t ${ecrRepo}:${env.BUILD_ID} ."
                 }
             }
         }
         stage('Push to Registry') {
             steps {
                 container('docker') {
-                    withDockerRegistry([ credentialsId: "ECR", url: ecrRegistry ]) {
-                      sh "docker push ${ecrRepo}:${env.BUILD_ID}"
+                    script {
+                        docker.withRegistry(ecrRegistry, 'ecr:us-west-2:AWS_CREDS') {
+                            sh "docker push ${ecrRepo}:${env.BUILD_ID}"
+                        }   
                     }
                 }
             }
@@ -48,7 +43,7 @@ pipeline {
             steps {
                 container('kubectl') {
                     withKubeConfig([credentialsId: 'EKS', serverUrl: eksCluster]) {
-                      sh "kubectl run test-${env.BUILD_ID} --image=${ecrRepo}:${env.BUILD_ID} --replicas=1"
+                      sh "ECR_REPO=${ecrRepo} TAG=${env.BUILD_ID} kubectl apply -f ./BaseWithAdmin/kubernetes/net-app.yaml"
                    }
                 }
             }
