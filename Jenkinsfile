@@ -3,6 +3,9 @@ ecrRepo = "174863393238.dkr.ecr.us-west-2.amazonaws.com/ci-cd-demo"
 eksCluster = "https://74A99A33DEC6AE680D631929F926AFAE.sk1.us-west-2.eks.amazonaws.com"
 
 pipeline {
+    options {
+      skipDefaultCheckout()
+    }
     agent {
         kubernetes {
         yaml """
@@ -24,6 +27,7 @@ pipeline {
         stage('Build Image & Run Tests') {
             steps {
                 container('docker') {
+                    checkout scm
                     sh "docker build -t ${ecrRepo}:${env.BUILD_ID} ."
                 }
             }
