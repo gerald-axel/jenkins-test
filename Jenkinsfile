@@ -5,6 +5,7 @@ eksCluster = "https://74A99A33DEC6AE680D631929F926AFAE.sk1.us-west-2.eks.amazona
 pipeline {
     options {
       skipDefaultCheckout()
+      clearWorkspace()
     }
     agent {
         kubernetes {
