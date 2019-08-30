@@ -8,6 +8,7 @@ pipeline {
     }
     agent {
         kubernetes {
+        cloud 'kubernetes-gcp'
         yaml """
         spec:
           containers:
