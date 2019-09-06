@@ -61,7 +61,9 @@ pipeline {
             steps {
                 container('kubectl') {
                     withKubeConfig([credentialsId: kubernetesCreds, serverUrl: kubernetes]) {
-                      sh "ECR_REPO=${dockerRepo} TAG=${env.BUILD_ID} kubectl apply -f ./BaseWithAdmin/kubernetes/net-app.yaml"
+                      sh """
+                        helm install --set Tag=${env.BUILD_ID} -f unit-test.yaml .
+                      """
                    }
                 }
             }
