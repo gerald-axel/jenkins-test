@@ -34,6 +34,11 @@ pipeline {
               command:
               - cat
               tty: true
+            - name: helm
+              image: alpine/helm
+              command:
+              - cat
+              tty: true
         """
         }
     }
@@ -59,7 +64,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                container('kubectl') {
+                container('helm') {
                     withKubeConfig([credentialsId: kubernetesCreds, serverUrl: kubernetes]) {
                       sh """
                         helm install --set Tag=${env.BUILD_ID} -f unit-test.yaml .
