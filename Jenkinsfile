@@ -68,7 +68,7 @@ pipeline {
                     withKubeConfig([credentialsId: kubernetesCreds, serverUrl: kubernetes]) {
                         checkout scm
                         sh """
-                        helm install --set Tag=${env.BUILD_ID} -f unit-test.yaml charts
+                        helm install --set Tag=${env.BUILD_ID} charts
                       """
                    }
                 }
