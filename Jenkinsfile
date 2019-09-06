@@ -11,7 +11,7 @@ if (deploymentCloud == "kubernetes-gcp"){
     registry = 'https://174863393238.dkr.ecr.us-west-2.amazonaws.com'
     registryCreds = 'ecr:us-west-2:AWS_CREDS'
     kubernetes = 'https://74A99A33DEC6AE680D631929F926AFAE.sk1.us-west-2.eks.amazonaws.com'
-    kubernetesCreds = 'EKS'
+    kubernetesCreds = 'geraldaxelalbamo'
     dockerRepo = "174863393238.dkr.ecr.us-west-2.amazonaws.com/ci-cd-demo"
 }
 
