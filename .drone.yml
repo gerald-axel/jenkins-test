@@ -3,8 +3,6 @@ type: docker
 name: greeting
 
 steps:
-- name: en
-  image: alpine
-  commands:
-  - echo hello
-  - echo world
+- name: Building image
+  commands: 
+    - ls
