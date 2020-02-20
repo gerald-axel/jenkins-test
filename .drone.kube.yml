@@ -2,14 +2,11 @@ kind: pipeline
 type: kubernetes
 name: default
 
-clone:
-  disable: true
-
 steps:
 - name: greeting
   image: alpine
   commands:
-  - sleep 120
+  #- sleep 120
   - echo hello
   - echo world
 
