@@ -1,9 +1,12 @@
----
 kind: pipeline
 type: kubernetes
 name: default
 
-- name: en
+clone:
+  disable: true
+
+steps:
+- name: greeting
   image: alpine
   commands:
   - echo hello
