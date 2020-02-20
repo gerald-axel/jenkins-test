@@ -12,3 +12,10 @@ steps:
   - sleep 120
   - echo hello
   - echo world
+
+- name: docker  
+  image: plugins/docker
+  settings:
+    repo: test/coco
+    build_args:
+      - TEST=coco
