@@ -1,0 +1,10 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+
+- name: en
+  image: alpine
+  commands:
+  - echo hello
+  - echo world
