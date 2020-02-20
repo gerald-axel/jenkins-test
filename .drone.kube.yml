@@ -10,9 +10,18 @@ steps:
   - echo hello
   - echo world
 
-- name: docker  
-  image: plugins/docker
+- name: publish  
+  image: plugins/gcr
   settings:
-    repo: test/coco
-    build_args:
-      - TEST=coco
+    registry: gcr.io
+    repo: digitaldatamarketplace/cicd-demo
+    tags: latest
+    json_key:
+      from_secret: google_credentials
+      
+#- name: docker  
+#  image: plugins/docker
+#  settings:
+#    repo: test/coco
+#    build_args:
+#      - TEST=coco
