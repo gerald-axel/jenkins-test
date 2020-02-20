@@ -9,5 +9,6 @@ steps:
 - name: greeting
   image: alpine
   commands:
+  - sleep 120
   - echo hello
   - echo world
