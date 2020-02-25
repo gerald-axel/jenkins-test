@@ -5,6 +5,7 @@ name: default
 steps:
 - name: greeting
   image: alpine
+  purge: true
   commands:
   #- sleep 120
   - echo hello
@@ -12,6 +13,7 @@ steps:
 
 - name: publish  
   image: plugins/gcr
+  purge: true
   settings:
     registry: gcr.io
     repo: digitaldatamarketplace/cicd-demo
