@@ -35,15 +35,15 @@ steps:
 #    kube_skip: true
 #    kube_skip_tls: true
 
-  - name: deploy_production
-    image: pelotech/drone-helm3
-    settings:
-      helm_command: upgrade
-      chart: /charts
-      release: my-project
-      kube_api_server: https://10.1.2.135:8443
-      kubernetes_token:
-        from_secret: kube_token
-    namespace: drone
-    wait_for_upgrade: true
-    skip_tls_verify: true
+- name: deploy_production
+  image: pelotech/drone-helm3
+  settings:
+    helm_command: upgrade
+    chart: /charts
+    release: my-project
+    kube_api_server: https://10.1.2.135:8443
+    kubernetes_token:
+      from_secret: kube_token
+  namespace: drone
+  wait_for_upgrade: true
+  skip_tls_verify: true
