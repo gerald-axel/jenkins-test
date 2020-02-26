@@ -7,7 +7,7 @@ steps:
   image: alpine
   purge: true
   commands:
-  #- sleep 120
+  - sleep 5
   - echo hello
   - echo world
 
@@ -20,7 +20,18 @@ steps:
     tags: latest
     json_key:
       from_secret: google_credentials
-      
+
+- name: deploy
+  image: bitsbeats/drone-helm3
+  settings:
+    kube_api_server: https://10.1.2.135
+    kube_token:
+      from_secret: kube_token
+    chart: ./charts
+    release: myapp-staging
+    wait: true
+    force: true
+
 #- name: docker  
 #  image: plugins/docker
 #  settings:
