@@ -55,6 +55,6 @@ steps:
   release: ${DRONE_BRANCH}
   prefix: STAGING
   namespace: drone
-  api_server: https://10.1.2.135:8443
-  kubernetes_token:
+  API_SERVER: https://10.1.2.135:8443
+  KUBERNETES_TOKEN:
       from_secret: kube_token
