@@ -11,15 +11,15 @@ steps:
   - echo hello
   - echo world
 
-- name: publish  
-  image: plugins/gcr
-  purge: true
-  settings:
-    registry: gcr.io
-    repo: digitaldatamarketplace/cicd-demo
-    tags: latest
-    json_key:
-      from_secret: google_credentials
+#- name: publish  
+#  image: plugins/gcr
+#  purge: true
+#  settings:
+#    registry: gcr.io
+#    repo: digitaldatamarketplace/cicd-demo
+#    tags: latest
+#    json_key:
+#      from_secret: google_credentials
 
 - name: deploy
   image: bitsbeats/drone-helm3
@@ -31,10 +31,4 @@ steps:
     release: myapp-staging
     wait: true
     force: true
-
-#- name: docker  
-#  image: plugins/docker
-#  settings:
-#    repo: test/coco
-#    build_args:
-#      - TEST=coco
+    namespace: drone
