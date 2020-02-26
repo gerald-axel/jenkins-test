@@ -33,3 +33,4 @@ steps:
     force: true
     namespace: drone
     kube_skip_tls: true
+    kube_skip: true
