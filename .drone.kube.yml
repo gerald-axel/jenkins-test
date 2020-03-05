@@ -34,7 +34,7 @@ steps:
     release: test
     values: Tag=${DRONE_BRANCH}
     skip_tls_verify: true
-  namespace: drone
+  namespace: test
   environment:
     API_SERVER: https://34.70.80.129
     KUBERNETES_TOKEN:
