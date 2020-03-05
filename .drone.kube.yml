@@ -8,7 +8,7 @@ steps:
   purge: true
   commands:
   - sleep 5
-  - echo hello
+  - echo helloo
   - echo world
 
 - name: publish
