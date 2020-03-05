@@ -11,9 +11,23 @@ steps:
   - echo helloo
   - echo world
 
-- name: build-test-publish
+- name: build
   image: plugins/docker
   purge: true
+  settings:
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    tags: latest
+    dockerfile: Dockerfile
+    dry_run: false
+
+- name: test
+  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+  purge: true
+  commands:
+    - mvn test
+
+- name: publish
+  image: plugins/docker
   settings:
     username:
       from_secret: harbor_user
@@ -22,10 +36,6 @@ steps:
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     tags: latest
-    dockerfile: Dockerfile
-  commands:
-  - mvn test
-  #    dry_run: false
 
 #- name: publish
 #  image: plugins/gcr
