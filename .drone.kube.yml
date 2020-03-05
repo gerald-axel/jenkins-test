@@ -3,43 +3,36 @@ type: kubernetes
 name: default
 
 steps:
-- name: build
-  image: plugins/docker
-  settings:
-    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-    dockerfile: Dockerfile
-    dry_run: true
+#- name: build
+#  image: plugins/docker
+#  settings:
+#    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+#    dockerfile: Dockerfile
+#    dry_run: true
 
-- name: test
-  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-  commands:
-    - mvn test
+#- name: test
+#  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+#  commands:
+#    - mvn test
 
-- name: publish
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: harbor_user
-    password:
-      from_secret: harbor_password
-    registry: harbor.internal.ddm.zdatainc.io
-    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-    purgue: true
-    tags: ${DRONE_COMMIT}
+#- name: publish
+#  image: plugins/docker
+#  settings:
+#    username:
+#      from_secret: harbor_user
+#    password:
+#      from_secret: harbor_password
+#    registry: harbor.internal.ddm.zdatainc.io
+#    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+#    purgue: true
+#    tags: ${DRONE_COMMIT}
 
 - name: deploy
   image: quay.io/ipedrazas/drone-helm
   settings:
-    skip_tls_verify: true
-    username:
-      from_secret: harbor_user
-    password:
-      from_secret: harbor_password
     chart: ./charts
-    release: ${DRONE_BRANCH}
-    namespace: drone
+    release: test
     values: Tag=${DRONE_BRANCH}
-    registry: harbor.internal.ddm.zdatainc.io
   namespace: drone
   environment:
     API_SERVER: https://34.70.80.129
