@@ -11,7 +11,7 @@ steps:
   - echo helloo
   - echo world
 
-- name: build-publish
+- name: build-test-publish
   image: plugins/docker
   purge: true
   settings:
@@ -23,6 +23,9 @@ steps:
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     tags: latest
     dockerfile: Dockerfile
+  commands:
+  - mvn test
+  #    dry_run: false
 
 #- name: publish
 #  image: plugins/gcr
