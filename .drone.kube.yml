@@ -11,42 +11,29 @@ steps:
   - echo helloo
   - echo world
 
-- name: publish
-  image: plugins/gcr
+- name: build and publish
+  image: plugins/docker
   purge: true
   settings:
-    registry: gcr.io
-    repo: digitaldatamarketplace/cicd-demo
+    username:
+      from_secret: harbor_user
+    password:
+      from_secret: harbor_password
+    registry:
+      from_secret: harbor_registry
+    repo: library/cicd-demo
     tags: latest
-    json_key:
-      from_secret: google_credentials
+    dockerfile: Dockerfile
 
-#- name: deploy
-#  image: bitsbeats/drone-helm3
+#- name: publish
+#  image: plugins/gcr
+#  purge: true
 #  settings:
-#    kube_api_server: https://10.1.2.135:8443
-#    kube_token:
-#      from_secret: kube_token
-#    chart: ./charts
-#    release: myapp-staging
-#    wait: true
-#    force: true
-#    namespace: drone
-#    kube_skip: true
-#    kube_skip_tls: true
-
-#- name: deploy_production
-#  image: pelotech/drone-helm3
-#  settings:
-#    helm_command: upgrade
-#    chart: ./charts
-#    release: my-project
-#    kube_api_server: https://10.1.2.135:8443
-#    kubernetes_token:
-#      from_secret: kube_token
-#  namespace: drone
-#  wait_for_upgrade: true
-#  skip_tls_verify: true
+#    registry: gcr.io
+#    repo: digitaldatamarketplace/cicd-demo
+#    tags: latest
+#    json_key:
+#      from_secret: google_credentials
 
 #- name: deploy_helm
 #  image: quay.io/ipedrazas/drone-helm
