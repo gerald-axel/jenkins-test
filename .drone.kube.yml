@@ -7,12 +7,12 @@ steps:
   image: plugins/docker
   settings:
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-    tags: ${DRONE_COMMIT}
+#    tags: ${DRONE_COMMIT}
     dockerfile: Dockerfile
     dry_run: true
 
 - name: test
-  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo:${DRONE_COMMIT}
+  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
   commands:
     - mvn test
 
