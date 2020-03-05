@@ -11,7 +11,7 @@ steps:
   - echo helloo
   - echo world
 
-- name: build and publish
+- name: build-publish
   image: plugins/docker
   purge: true
   settings:
