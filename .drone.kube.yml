@@ -34,6 +34,7 @@ steps:
     release: test
     values: Tag=${DRONE_BRANCH}
     skip_tls_verify: true
+    namespace: test
   namespace: test
   environment:
     API_SERVER: https://34.70.80.129
