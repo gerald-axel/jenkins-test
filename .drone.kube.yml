@@ -30,6 +30,7 @@ steps:
 - name: deploy
   image: quay.io/ipedrazas/drone-helm
   settings:
+    skip_tls_verify: true
     username:
       from_secret: harbor_user
     password:
