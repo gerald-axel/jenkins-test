@@ -7,7 +7,6 @@ steps:
   image: plugins/docker
   settings:
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-#    tags: ${DRONE_COMMIT}
     dockerfile: Dockerfile
     dry_run: true
 
@@ -28,7 +27,25 @@ steps:
     purgue: true
     tags: ${DRONE_COMMIT}
 
-#- name: publish
+- name: deploy
+  image: quay.io/ipedrazas/drone-helm
+  settings:
+    username:
+      from_secret: harbor_user
+    password:
+      from_secret: harbor_password
+    chart: ./charts
+    release: ${DRONE_BRANCH}
+    namespace: drone
+    values: Tag=${DRONE_BRANCH}
+    registry: harbor.internal.ddm.zdatainc.io
+#  namespace: drone
+  environment:
+    API_SERVER: https://34.70.80.129
+    KUBERNETES_TOKEN:
+      from_secret: kube_token
+
+#- name: publish-gcr
 #  image: plugins/gcr
 #  purge: true
 #  settings:
@@ -37,16 +54,3 @@ steps:
 #    tags: latest
 #    json_key:
 #      from_secret: google_credentials
-
-#- name: deploy
-#  image: quay.io/ipedrazas/drone-helm
-#  settings:
-#    skip_tls_verify: true
-#    chart: ./charts
-#    release: ${DRONE_BRANCH}
-#    namespace: drone
-#  namespace: drone
-#  environment:
-#    API_SERVER: https://10.1.2.135:8443
-#    KUBERNETES_TOKEN:
-#      from_secret: kube_token
