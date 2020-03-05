@@ -2,7 +2,7 @@ kind: pipeline
 type: kubernetes
 name: default
 
-steps:
+pipeline:
 #- name: build
 #  image: plugins/docker
 #  settings:
