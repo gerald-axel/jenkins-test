@@ -19,8 +19,7 @@ steps:
       from_secret: harbor_user
     password:
       from_secret: harbor_password
-    registry:
-      from_secret: harbor_registry
+    registry: harbor.internal.ddm.zdatainc.io
     repo: library/cicd-demo
     tags: latest
     dockerfile: Dockerfile
