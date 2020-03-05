@@ -5,16 +5,14 @@ name: default
 steps:
 - name: build
   image: plugins/docker
-  purge: true
   settings:
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-    tags: latest
+    tags: ${DRONE_COMMIT}
     dockerfile: Dockerfile
     dry_run: true
 
 - name: test
-  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-  purge: true
+  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo:${DRONE_COMMIT}
   commands:
     - mvn test
 
@@ -27,7 +25,8 @@ steps:
       from_secret: harbor_password
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-    tags: latest
+    purgue: true
+    tags: ${DRONE_COMMIT}
 
 #- name: publish
 #  image: plugins/gcr
@@ -39,7 +38,7 @@ steps:
 #    json_key:
 #      from_secret: google_credentials
 
-#- name: deploy_helm
+#- name: deploy
 #  image: quay.io/ipedrazas/drone-helm
 #  settings:
 #    skip_tls_verify: true
