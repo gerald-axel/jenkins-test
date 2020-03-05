@@ -3,14 +3,6 @@ type: kubernetes
 name: default
 
 steps:
-- name: greeting
-  image: alpine
-  purge: true
-  commands:
-  - sleep 5
-  - echo helloo
-  - echo world
-
 - name: build
   image: plugins/docker
   purge: true
@@ -18,7 +10,7 @@ steps:
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     tags: latest
     dockerfile: Dockerfile
-    dry_run: false
+    dry_run: true
 
 - name: test
   image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
