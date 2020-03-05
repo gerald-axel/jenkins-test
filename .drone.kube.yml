@@ -33,12 +33,11 @@ steps:
     chart: ./charts
     release: test
     values: Tag=${DRONE_BRANCH}
-    skip_tls_verify: true
   namespace: drone
-  environment:
-    API_SERVER: https://34.70.80.129
-    KUBERNETES_TOKEN:
-      from_secret: kube_token
+#  environment:
+#    API_SERVER: https://34.70.80.129
+#    KUBERNETES_TOKEN:
+#      from_secret: kube_token
 
 #- name: publish-gcr
 #  image: plugins/gcr
