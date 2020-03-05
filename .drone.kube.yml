@@ -27,13 +27,13 @@ steps:
 #    purgue: true
 #    tags: ${DRONE_COMMIT}
 
-- name: deploy
-  image: quay.io/ipedrazas/drone-helm
-  settings:
-    chart: ./charts
-    release: test
-    values: Tag=${DRONE_BRANCH}
-  namespace: drone
+  helm_deploy:
+    image: quay.io/ipedrazas/drone-helm
+    settings:
+      chart: ./charts
+      release: test
+      values: Tag=${DRONE_BRANCH}
+    namespace: drone
 #  environment:
 #    API_SERVER: https://34.70.80.129
 #    KUBERNETES_TOKEN:
