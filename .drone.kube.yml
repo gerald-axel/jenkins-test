@@ -35,7 +35,7 @@ steps:
     release: test
     skip_tls_verify: true
     values: Tag=${DRONE_COMMIT}
-    #namespace: drone
+    namespace: drone
     api_server:
       from_secret: prod_api_server
     kubernetes_token:
