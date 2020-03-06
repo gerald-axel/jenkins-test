@@ -3,29 +3,29 @@ type: kubernetes
 name: default
 
 steps:
-#- name: build
-#  image: plugins/docker
-#  settings:
-#    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-#    dockerfile: Dockerfile
-#    dry_run: true
+- name: build
+  image: plugins/docker
+  settings:
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    dockerfile: Dockerfile
+    dry_run: true
 
-#- name: test
-#  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-#  commands:
-#    - mvn test
+- name: test
+  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+  commands:
+    - mvn test
 
-#- name: publish
-#  image: plugins/docker
-#  settings:
-#    username:
-#      from_secret: harbor_user
-#    password:
-#      from_secret: harbor_password
-#    registry: harbor.internal.ddm.zdatainc.io
-#    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-#    purgue: true
-#    tags: ${DRONE_COMMIT}
+- name: publish
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: harbor_user
+    password:
+      from_secret: harbor_password
+    registry: harbor.internal.ddm.zdatainc.io
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    purgue: true
+    tags: ${DRONE_COMMIT}
 
 - name: deploy_production
   image: pelotech/drone-helm3
@@ -34,8 +34,7 @@ steps:
     chart: ./charts
     release: test
     skip_tls_verify: true
-    #values: Tag=${DRONE_COMMIT}
-    values: Tag=latest
+    values: Tag=${DRONE_COMMIT}
     namespace: drone
     wait_for_upgrade: true
     api_server:
