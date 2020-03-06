@@ -34,8 +34,10 @@ steps:
     chart: ./charts
     release: test
     skip_tls_verify: true
-    values: Tag=${DRONE_COMMIT}
+    #values: Tag=${DRONE_COMMIT}
+    values: Tag=latest
     namespace: drone
+    wait_for_upgrade: true
     api_server:
       from_secret: prod_api_server
     kubernetes_token:
