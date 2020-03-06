@@ -37,6 +37,7 @@ steps:
     values: Tag=${DRONE_COMMIT}
     namespace: drone
     wait_for_upgrade: true
+    cleanup_failed_upgrade: true
     api_server:
       from_secret: prod_api_server
     kubernetes_token:
