@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: unit-test
-        image: gcr.io/gke-test-251020/ci-cd-demo:{{ .Values.Tag }}
+        image: harbor.internal.ddm.zdatainc.io/library/cicd-demo:{{ .Values.Tag }}
         ports:
           - containerPort: 8080
