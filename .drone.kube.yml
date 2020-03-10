@@ -19,7 +19,7 @@ steps:
   image: plugins/docker
   settings:
     username:
-      from_secret: harbor_user
+      from_secret: harbor_username
     password:
       from_secret: harbor_password
     registry: harbor.internal.ddm.zdatainc.io
@@ -39,9 +39,9 @@ steps:
     wait_for_upgrade: true
     cleanup_failed_upgrade: true
     api_server:
-      from_secret: prod_api_server
+      from_secret: kubernetes_stage_server
     kubernetes_token:
-      from_secret: kube_token
+      from_secret: kubernetes_token
 
 #- name: publish-gcr
 #  image: plugins/gcr
@@ -52,3 +52,28 @@ steps:
 #    tags: latest
 #    json_key:
 #      from_secret: google_credentials
+
+---
+kind: secret
+name: harbor_username
+get:
+  path: docker
+  harbor_username: harbor_username
+---
+kind: secret
+name: harbor_password
+get:
+  path: docker
+  name: harbor_password
+---
+kind: secret
+name: kubernetes_token
+get:
+  path: docker
+  name: kubernetes_token
+---
+kind: secret
+name: kubernetes_stage_server
+get:
+  path: docker
+  name: kubernetes_stage_server
