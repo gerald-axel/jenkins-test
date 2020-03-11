@@ -5,17 +5,15 @@ name: default
 steps:
 - name: build
   image: plugins/docker
-  commands:
-    - docker build -t harbor.internal.ddm.zdatainc.io/library/cicd-demo .
-#  settings:
-#    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-#    dockerfile: Dockerfile
-#    dry_run: true
+  settings:
+    repo: cicd-demo
+    dockerfile: Dockerfile
+    dry_run: true
 
 - name: test
-  image: plugins/docker
+  image: cicd-demo
   commands:
-    - docker run harbor.internal.ddm.zdatainc.io/library/cicd-demo mvn test
+    - mvn test
 
 - name: publish
   image: plugins/docker
