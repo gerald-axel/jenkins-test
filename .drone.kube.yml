@@ -15,7 +15,6 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    repo: cicd-demo
     dockerfile: Dockerfile
     username:
       from_secret: harbor_username
