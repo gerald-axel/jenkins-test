@@ -3,6 +3,13 @@ type: kubernetes
 name: default
 
 steps:
+- name: test
+  image: alpine
+  commands:
+    - ls
+    - echo ${harbor_username}
+    - echo ${DRONE_RPC_HOST}
+    
 - name: build
   image: plugins/docker
   settings:
