@@ -8,11 +8,15 @@ steps:
   settings:
     repo: cicd-demo
     dockerfile: Dockerfile
-    dry_run: true
-
+    username:
+      from_secret: harbor_username
+    password:
+      from_secret: harbor_password
+    registry: harbor.internal.ddm.zdatainc.io
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+  
 - name: test
-  image: cicd-demo
-  pull: if-not-exists
+  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
   commands:
     - mvn test
 
