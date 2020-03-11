@@ -12,6 +12,7 @@ steps:
 
 - name: test
   image: cicd-demo
+  pull: if-not-exists
   commands:
     - mvn test
 
