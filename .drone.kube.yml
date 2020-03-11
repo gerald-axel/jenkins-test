@@ -5,7 +5,7 @@ name: default
 steps:
 - name: testo
   image: alpine
-   environment:
+  environment:
     USERNAME:
       from_secret: harbor_username
   commands:
