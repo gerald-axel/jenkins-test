@@ -62,23 +62,23 @@ steps:
 kind: secret
 name: harbor_username
 get:
-  path: docker
+  path: drone-server-secrets
   harbor_username: harbor_username
 ---
 kind: secret
 name: harbor_password
 get:
-  path: docker
+  path: drone-server-secrets
   name: harbor_password
 ---
 kind: secret
 name: kubernetes_token
 get:
-  path: docker
+  path: drone-server-secrets
   name: kubernetes_token
 ---
 kind: secret
 name: kubernetes_stage_server
 get:
-  path: docker
+  path: drone-server-secrets
   name: kubernetes_stage_server
