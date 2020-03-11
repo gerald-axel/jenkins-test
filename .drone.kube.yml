@@ -5,10 +5,12 @@ name: default
 steps:
 - name: testo
   image: alpine
+   environment:
+    USERNAME:
+      from_secret: harbor_username
   commands:
     - ls
-    - echo ${harbor_username}
-    - echo ${DRONE_RPC_HOST}
+    - echo ${USERNAME}
     
 - name: build
   image: plugins/docker
@@ -70,7 +72,7 @@ kind: secret
 name: harbor_username
 get:
   path: drone-server-secrets
-  harbor_username: harbor_username
+  name: harbor_username
 ---
 kind: secret
 name: harbor_password
