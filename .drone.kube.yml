@@ -13,7 +13,7 @@ steps:
       from_secret: ${PASSWORD}
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-   environment:
+  environment:
     PASSWORD:
       from_secret: password
 
