@@ -2,15 +2,7 @@ kind: pipeline
 type: kubernetes
 name: default
 
-steps:
-- name: testo
-  image: plugins/docker
-  environment:
-    USERNAME:
-      from_secret: harbor_username
-  commands:
-    - ls
-    
+steps:    
 - name: build
   image: plugins/docker
   settings:
@@ -54,38 +46,3 @@ steps:
       from_secret: kubernetes_stage_server
     kubernetes_token:
       from_secret: kubernetes_token
-
-#- name: publish-gcr
-#  image: plugins/gcr
-#  purge: true
-#  settings:
-#    registry: gcr.io
-#    repo: digitaldatamarketplace/cicd-demo
-#    tags: latest
-#    json_key:
-#      from_secret: google_credentials
-
----
-kind: secret
-name: harbor_username
-get:
-  path: drone-server-secrets
-  name: harbor_username
----
-kind: secret
-name: harbor_password
-get:
-  path: drone-server-secrets
-  name: harbor_password
----
-kind: secret
-name: kubernetes_token
-get:
-  path: drone-server-secrets
-  name: kubernetes_token
----
-kind: secret
-name: kubernetes_stage_server
-get:
-  path: drone-server-secrets
-  name: kubernetes_stage_server
