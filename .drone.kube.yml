@@ -18,15 +18,19 @@ steps:
     PASSWORD:
       from_secret: password
 
----
-kind: secret
-name: harbor_password
-get:
-  path: drone-server-secrets
-  name: harbor_password
+#---
+#kind: secret
+#name: harbor_password
+#get:
+#  path: drone-server-secrets
+#  name: harbor_password
 ---
 kind: secret
 name: password
 get:
   path: docker
   name: password
+---
+kind: secret
+name: password
+data: OvTBRqKYt6y8yds7KhUuvtI9uBSkJz6Sm/j0YpLD69se
