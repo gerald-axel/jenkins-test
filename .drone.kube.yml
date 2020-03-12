@@ -8,11 +8,12 @@ steps:
   image: plugins/docker
   settings:
     username: admin
-    password: ${PASSWORD}
+    password:
+      from_secret: password
     registry: harbor.internal.ddm.zdatainc.io
-    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    repo: harbor.internal.ddm.zdatainc.io/library/alpine
     purgue: true
-    tags: cocolizo
+    tags: latest
   environment:
     PASSWORD:
       from_secret: password
