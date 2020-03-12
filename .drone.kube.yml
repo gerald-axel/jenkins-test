@@ -22,8 +22,8 @@ steps:
 #  name: harbor_password
 ---
 kind: secret
-name: password
-data: ilL3+lF41uG6tLjglfkF4HDtB3gSdKAODt+XIJIX1Y5x
+name: harbor_password
+data: scK9oWwLL0JYZpn7sWgvY3VL0L5vNQzsfRRWkTEL9JoN
 ---
 kind: secret
 name: kubernetes_tokeno
