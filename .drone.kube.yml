@@ -3,10 +3,14 @@ type: kubernetes
 
 steps:
 - name: build
-  image: alpine
+  image: plugins/docker
   commands:
   - echo ${HARBOR_PASSWORD}
   - echo ${PASSWORD}
+  - echo ${USERNAME}
+  - docker login -u $USERNAME -p $PASSWORD
+  - docker build -t hello-world .
+  - docker push hello-world
   environment:
     PASSWORD:
       from_secret: HARBOR_PASSWORD
