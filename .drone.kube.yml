@@ -10,9 +10,12 @@ steps:
     dockerfile: Dockerfile
     username: admin
     password:
-      from_secret: harbor_password
+      from_secret: ${PASSWORD}
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+   environment:
+    PASSWORD:
+      from_secret: password
 
 #---
 #kind: secret
@@ -22,7 +25,7 @@ steps:
 #  name: harbor_password
 ---
 kind: secret
-name: harbor_password
+name: password
 data: scK9oWwLL0JYZpn7sWgvY3VL0L5vNQzsfRRWkTEL9JoN
 ---
 kind: secret
