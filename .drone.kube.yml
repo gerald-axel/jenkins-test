@@ -4,9 +4,9 @@ type: kubernetes
 steps:
 - name: build
   commands:
-  - docker login -u $USERNAME -p $PASSWORD
-  - docker build -t hello-world .
-  - docker push hello-world
+  - docker login -u $USERNAME -p $HARBOR_PASSWORD harbor.internal.ddm.zdatainc.io
+  - docker build -t harbor.internal.ddm.zdatainc.io/library/hello-world .
+  - docker push harbor.internal.ddm.zdatainc.io/library/hello-world
   environment:
     PASSWORD:
       from_secret: HARBOR_PASSWORD
