@@ -2,7 +2,10 @@ kind: pipeline
 type: kubernetes
 
 steps:
-
+- name: default
+  image: alpine
+  dry_run: true
+  
 - name: deploy_production
   image: pelotech/drone-helm3
   settings:
