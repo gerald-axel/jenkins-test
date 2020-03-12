@@ -10,19 +10,16 @@ steps:
     dockerfile: Dockerfile
     username: admin
     password:
-      from_secret: password
+      from_secret: HARBOR_PASSWORD
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-  environment:
-    PASSWORD:
-      from_secret: password
 
-#---
-#kind: secret
-#name: harbor_password
-#get:
-#  path: drone-server-secrets
-#  name: harbor_password
+---
+kind: secret
+name: HARBOR_PASSWORD
+get:
+  path: drone-server-secrets
+  name: HARBOR_PASSWORD
 ---
 kind: secret
 name: password
