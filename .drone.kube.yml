@@ -15,6 +15,6 @@ steps:
     wait_for_upgrade: true
     cleanup_failed_upgrade: true
     api_server:
-      from_secret: kubernetes_stage_server
+      from_secret: prod_api_server
     kubernetes_token:
       from_secret: kubernetes_token
