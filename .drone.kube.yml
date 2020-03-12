@@ -3,43 +3,6 @@ type: kubernetes
 name: default
 
 steps:
-- name: coco
-  image: alpine
-  environment:
-    USERNAME:
-      from_secret: harbor_username
-  commands:
-    - ls
-    - echo ${USERNAME}
-
-- name: build
-  image: plugins/docker
-  settings:
-    dockerfile: Dockerfile
-    username:
-      from_secret: harbor_username
-    password:
-      from_secret: harbor_password
-    registry: harbor.internal.ddm.zdatainc.io
-    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-  
-- name: test
-  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-  commands:
-    - mvn test
-
-- name: publish
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: harbor_username
-    password:
-      from_secret: harbor_password
-    registry: harbor.internal.ddm.zdatainc.io
-    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-    purgue: true
-    tags: ${DRONE_COMMIT}
-
 - name: deploy_production
   image: pelotech/drone-helm3
   settings:
