@@ -8,15 +8,14 @@ steps:
   image: plugins/docker
   settings:
     username: admin
-    password:
-      from_secret: harbor_password
+    password: ${PASSWORD}
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     purgue: true
     tags: cocolizo
   environment:
-    harbor_password:
-      from_secret: harbor_password
+    PASSWORD:
+      from_secret: password
 
 ---
 kind: secret
@@ -24,3 +23,9 @@ name: harbor_password
 get:
   path: drone-server-secrets
   name: harbor_password
+---
+kind: secret
+name: password
+get:
+  path: docker
+  name: password
