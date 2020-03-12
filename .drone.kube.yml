@@ -2,33 +2,6 @@ kind: pipeline
 type: kubernetes
 
 steps:
-- name: alpine
+- name: hub.docker.com/library/alpine
   commands:
-    - ${HARBOR_PASSWORD}
-  
-- name: build
-  image: plugins/docker
-  settings:
-    insecure: true
-    dockerfile: Dockerfile
-    username: admin
-    password:
-      from_secret: ${HARBOR_PASSWORD}
-    registry: harbor.internal.ddm.zdatainc.io
-    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-
----
-kind: secret
-name: HARBOR_PASSWORD
-get:
-  path: drone-server-secrets
-  name: HARBOR_PASSWORD
----
-kind: secret
-name: password
-data: scK9oWwLL0JYZpn7sWgvY3VL0L5vNQzsfRRWkTEL9JoN
----
-kind: secret
-name: kubernetes_tokeno
-data: xKobARIGOBmK6RCM89ZxhfIqOtxGo2JanT4YfdW45AXRX1D0Q+wnK1E9hRYIHmcJxDIFpYxQ3C30jlLFA+KnDXj2S+msdcUn3drSMAsyeIvOf9sgHWzqmrRP0A55z8vxSAf3DYCK76Bg6SDELjfoLzZW5InlFKDJyY2bgA21f1qjlM8maHSfrF/fhm3ZHshpNUwYl88g7+CliFRILc07BeSsW9h554AfRoLDryEBgRlrLImTkzNKIG8omAeT0hHfPS0NWq0L68U6HptA7aTW4T6h59Avyv/9bJcCorskSCxI7LdiLLSw22L/iCOIzDIfCgbh0mKwnlJGXrWQukLDPk0WfCkHxFWtNQWIhCA3jnVJmbwmzhjdDDhC9I2tSqkNqUh3pITtFLhZfQj/UsZw7jOklsVRUKFxorXqW7xTpEcgzZnwi1h+ShGU6jnXLrxXDJCxW+EKzBfrkMvET0HEBKgEKTMBWy+8AlbPMeq8UTijP0tt7bJsSi3X+sX+T7bkMCB+uRShLoLNeh2wKwHlIUQ0evNj7HC6Zo+/gwpefDgIynea4fHnz1DT/XtHhk1fW2DPqdxkJyc/7mQhHFz86fUxQ6jdEGLE1VMmBbgEMXgUA+FLdX39xLbvhkzzPithlTblosYSCEvToRFPgOPUyXbZqBdVuAm3GHRa7xEA3ZdvFFbnQCT2Ir/hhz7ZTCEal/eODHJMMW4mtKnWVcTDNwG4gBDOzfm9Yb6LzRhOVBw/5m1pJQRwsBKG5OIwXVmdB7o1Gve0VEePyX/Ne4KkRGhLbzLy7f7tBdQiLoEQD7vO3InDCULj5Skzs58QJ8pfTivapW8Wick7YxRLkyx2LRY5IX1d1owjD62CWp4KQ3JjHKEzUh9TCAlKvxYhNXxcg+ZE2F0aQ5fLtRi0R+bg6SsUmSQwzWsymJbrxYkZnlvOvmbCNyflZXac3uakYUsToCNKsTz4YHlq57+Mttk8ER4Uq5V9i306CnTRxQvUXY0CsvXJwDpUY2eoiSIMkDZ+2LYaVLy+H48G+W/pbrsmRqaAq7SMlQx2pKDXalaGoGNgEW6qrJW1JT3ANl4uranGIfcq8lDE4Y0aALcDrT0Fnnr4JZffl8X/RXHiqs5lLoFBCSvTXulsIqSMcQZMJ87+3cA4aOR83o7NMVpkEzQWWdJ7JB5nxGW2QvLtOw==
-
+    - echo ${HARBOR_PASSWORD}
