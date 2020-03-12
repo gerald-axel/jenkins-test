@@ -27,10 +27,4 @@ steps:
 ---
 kind: secret
 name: password
-get:
-  path: docker
-  name: password
----
-kind: secret
-name: password
 data: OvTBRqKYt6y8yds7KhUuvtI9uBSkJz6Sm/j0YpLD69se
