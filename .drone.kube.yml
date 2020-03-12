@@ -2,7 +2,16 @@ kind: pipeline
 type: kubernetes
 name: default
 
-steps:    
+steps:
+- name: coco
+  image: alpine
+  environment:
+    USERNAME:
+      from_secret: harbor_username
+  commands:
+    - ls
+    - echo ${USERNAME}
+
 - name: build
   image: plugins/docker
   settings:
