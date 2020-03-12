@@ -3,12 +3,10 @@ type: kubernetes
 
 steps:
 - name: build
+  image: alpine
   commands:
-  - ${HARBOR_PASSWORD}
-  - ${PASSWORD}
-  - docker login -u $USERNAME -p ${HARBOR_PASSWORD} harbor.internal.ddm.zdatainc.io
-  - docker build -t harbor.internal.ddm.zdatainc.io/library/hello-world .
-  - docker push harbor.internal.ddm.zdatainc.io/library/hello-world
+  - echo ${HARBOR_PASSWORD}
+  - echo ${PASSWORD}
   environment:
     PASSWORD:
       from_secret: HARBOR_PASSWORD
