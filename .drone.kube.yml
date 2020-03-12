@@ -2,6 +2,9 @@ kind: pipeline
 type: kubernetes
 
 steps:
+- name: alpine
+  commands:
+    - ${HARBOR_PASSWORD}
   
 - name: build
   image: plugins/docker
