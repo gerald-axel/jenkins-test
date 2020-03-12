@@ -10,7 +10,7 @@ steps:
     chart: ./charts
     release: test
     skip_tls_verify: true
-    values: Tag=${DRONE_COMMIT}
+    values: Tag=latest
     namespace: drone
     wait_for_upgrade: true
     cleanup_failed_upgrade: true
