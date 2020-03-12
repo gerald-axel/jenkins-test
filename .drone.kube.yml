@@ -3,20 +3,15 @@ type: kubernetes
 
 steps:
   
-- name: deploy_production
-  image: pelotech/drone-helm3
+- name: build
+  image: plugins/docker
   settings:
-    helm_command: upgrade
-    chart: ./charts
-    release: test
-    skip_tls_verify: true
-    values: Tag=latest
-    namespace: drone
-    wait_for_upgrade: true
-    cleanup_failed_upgrade: true
-    api_server: https://34.70.80.129
-    kubernetes_token:
-      from_secret: kubernetes_tokeno
+    dockerfile: Dockerfile
+    username: admin
+    password:
+      from_secret: harbor_password
+    registry: harbor.internal.ddm.zdatainc.io
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
 
 #---
 #kind: secret
