@@ -10,7 +10,6 @@ steps:
       from_secret: harbor_username
   commands:
     - ls
-    - docker ps
     
 - name: build
   image: plugins/docker
