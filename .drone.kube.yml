@@ -5,8 +5,8 @@ steps:
 - name: build
   image: plugins/docker
   commands:
-  - echo ${HARBOR_PASSWORD}
-  - echo ${PASSWORD}
+  - echo $${HARBOR_PASSWORD}
+  - echo $${PASSWORD}
   - echo $${USERNAME}
   - docker login -u $USERNAME -p $PASSWORD
   - docker build -t hello-world .
