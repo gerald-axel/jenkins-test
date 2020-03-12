@@ -2,6 +2,12 @@ kind: pipeline
 type: kubernetes
 
 steps:
-- name: hub.docker.com/library/alpine
+- name: build
   commands:
-    - echo ${HARBOR_PASSWORD}
+  - docker login -u $USERNAME -p $PASSWORD
+  - docker build -t hello-world .
+  - docker push hello-world
+  environment:
+    PASSWORD:
+      from_secret: HARBOR_PASSWORD
+    USERNAME: admin
