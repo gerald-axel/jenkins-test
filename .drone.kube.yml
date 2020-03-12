@@ -14,7 +14,6 @@ steps:
     namespace: drone
     wait_for_upgrade: true
     cleanup_failed_upgrade: true
-    environment:
-      API_SERVER: https://34.70.80.129
-      KUBE_TOKEN:
-        from_secret: kubernetes_token
+    api_server: https://34.70.80.129
+    kubernetes_token:
+      from_secret: kubernetes_token
