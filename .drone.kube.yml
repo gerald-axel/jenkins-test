@@ -6,15 +6,68 @@ steps:
   image: plugins/docker
   settings:
     dockerfile: Dockerfile
-    username: admin
+    username:
+      from_secret: HARBOR_USERNAME    
     password: 
       from_secret: HARBOR_PASSWORD
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     insecure: true
+    dry_run: true
+  
+- name: test
+  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+  commands:
+    - mvn test
+
+- name: publish
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: HARBOR_USERNAME
+    password:
+      from_secret: HARBOR_PASSWORD
+    registry: harbor.internal.ddm.zdatainc.io
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    purgue: true
+    tags: ${DRONE_COMMIT}
+
+- name: deploy_production
+  image: pelotech/drone-helm3
+  settings:
+    helm_command: upgrade
+    chart: ./charts
+    release: test
+    skip_tls_verify: true
+    values: Tag=${DRONE_COMMIT}
+    namespace: drone
+    wait_for_upgrade: true
+    cleanup_failed_upgrade: true
+    api_server: 
+      from_secret: KUBERNETES_STAGE_SERVER
+    kubernetes_token:
+      from_secret: KUBERNETES_TOKEN
 ---
 kind: secret
 name: HARBOR_PASSWORD
 get:
   path: drone-server-secrets
   name: HARBOR_PASSWORD
+---
+kind: secret
+name: HARBOR_USERNAME
+get:
+  path: drone-server-secrets
+  name: HARBOR_USERNAME
+---
+kind: secret
+name: KUBERNETES_TOKEN
+get:
+  path: drone-server-secrets
+  name: KUBERNETES_TOKEN
+---
+kind: secret
+name: KUBERNETES_STAGE_SERVER
+get:
+  path: drone-server-secrets
+  name: KUBERNETES_STAGE_SERVER
