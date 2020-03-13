@@ -17,12 +17,12 @@ steps:
 - name: publish
   image: plugins/docker
   settings:
-    username:
-      from_secret: HARBOR_USERNAME
+    username: admin
     password:
       from_secret: HARBOR_PASSWORD
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    insecure: true
     purgue: true
     tags: ${DRONE_COMMIT}
 
