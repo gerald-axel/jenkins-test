@@ -6,8 +6,7 @@ steps:
   image: plugins/docker
   settings:
     dockerfile: Dockerfile
-    username:
-      from_secret: HARBOR_USERNAME    
+    username: admin  
     password: 
       from_secret: HARBOR_PASSWORD
     registry: harbor.internal.ddm.zdatainc.io
