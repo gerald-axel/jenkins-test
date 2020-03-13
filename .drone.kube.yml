@@ -4,14 +4,17 @@ type: kubernetes
 steps:
 - name: build
   image: plugins/docker
-  commands:
-  - echo $${HARBOR_PASSWORD}
-  - echo $${PASSWORD}
-  - echo $${USERNAME}
-  - docker login -u $USERNAME -p $${PASSWORD}
-  - docker build -t hello-world .
-  - docker push hello-world
-  environment:
-    PASSWORD:
+  settings:
+    dockerfile: Dockerfile
+    username: admin
+    password:
       from_secret: HARBOR_PASSWORD
-    USERNAME: admin
+    registry: harbor.internal.ddm.zdatainc.io
+    repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
+    insecure: true
+---
+kind: secret
+name: HARBOR_PASSWORD
+get:
+  path: drone-server-secrets
+  name: HARBOR_PASSWORD
