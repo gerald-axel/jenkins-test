@@ -13,11 +13,6 @@ steps:
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     insecure: true
     dry_run: true
-  
-- name: test
-  image: harbor.internal.ddm.zdatainc.io/library/cicd-demo
-  commands:
-    - mvn test
 
 - name: publish
   image: plugins/docker
