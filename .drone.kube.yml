@@ -37,8 +37,7 @@ steps:
     namespace: drone
     wait_for_upgrade: true
     cleanup_failed_upgrade: true
-    api_server: 
-      from_secret: KUBERNETES_STAGE_SERVER
+    api_server: 34.70.80.129
     kubernetes_token:
       from_secret: KUBERNETES_TOKEN
 ---
