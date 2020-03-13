@@ -7,7 +7,8 @@ steps:
   settings:
     dockerfile: Dockerfile
     username: admin
-    password: ${HARBOR_PASSWORD}
+    password: 
+      from_secret: HARBOR_PASSWORD
     registry: harbor.internal.ddm.zdatainc.io
     repo: harbor.internal.ddm.zdatainc.io/library/cicd-demo
     insecure: true
