@@ -18,7 +18,8 @@ steps:
 - name: publish
   image: plugins/docker
   settings:
-    username: admin
+    username:
+      from_secret: HARBOR_USERNAME
     password:
       from_secret: HARBOR_PASSWORD
     registry: harbor.internal.ddm.zdatainc.io
@@ -38,7 +39,8 @@ steps:
     namespace: drone
     wait_for_upgrade: true
     cleanup_failed_upgrade: true
-    api_server: https://34.70.80.129
+    api_server: 
+      from_secret: KUBERNETES_STAGE_SERVER
     kubernetes_token:
       from_secret: KUBERNETES_TOKEN
 ---
