@@ -3,14 +3,14 @@ kind: pipeline
 type: kubernetes
 
 steps:
-- name: test
+- name: Build
   image: docker:dind
   volumes:
   - name: dockersock
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - docker ps -a
+  - docker build -t harbor.internal.ddm.zdatainc.io/library/cicd-demo .
 
 services:
 - name: docker
@@ -19,7 +19,27 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-
-volumes:
-- name: dockersock
-  temp: {}
+---
+kind: secret
+name: HARBOR_PASSWORD
+get:
+  path: drone-server-secrets
+  name: HARBOR_PASSWORD
+---
+kind: secret
+name: HARBOR_USERNAME
+get:
+  path: drone-server-secrets
+  name: HARBOR_USERNAME
+---
+kind: secret
+name: KUBERNETES_TOKEN
+get:
+  path: drone-server-secrets
+  name: KUBERNETES_TOKEN
+---
+kind: secret
+name: KUBERNETES_STAGE_SERVER
+get:
+  path: drone-server-secrets
+  name: KUBERNETES_STAGE_SERVER
