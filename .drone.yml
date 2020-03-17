@@ -16,7 +16,7 @@ steps:
   commands:
   - sleep 5 # give docker enough time to start
   - docker build -t harbor.internal.ddm.zdatainc.io/library/cicd-demo .
-  - docker login -u ${HARBOR_USERNAME} -p ${HARBOR_PASSWORD} harbor.internal.ddm.zdatainc.io
+  - docker login -u $HARBOR_USERNAME -p $HARBOR_PASSWORD harbor.internal.ddm.zdatainc.io
   - docker push harbor.internal.ddm.zdatainc.io/library/cicd-demo
   
 services:
