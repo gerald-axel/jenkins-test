@@ -19,6 +19,10 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
 ---
 kind: secret
 name: HARBOR_PASSWORD
