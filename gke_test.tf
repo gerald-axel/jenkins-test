@@ -7,7 +7,7 @@ variable "GCP_JSON_KEY" {
   type    = string
 }
 
-variable "project_id" {
+variable "PROJECT_ID" {
   type    = string
 }
 
@@ -31,7 +31,7 @@ provider "google" {
 
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
-  project_id                 = var.project_id
+  project_id                 = var.PROJECT_ID
   name                       = "ddm-drone-pipeline"
   region                     = var.location
   logging_service            = "none"
