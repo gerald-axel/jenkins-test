@@ -27,11 +27,13 @@ terraform {
 
 provider "google" {
   credentials = var.gcp_json_key
+  project     = var.project_id
+  region      = var.location
 }
 
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
-  project_id                 = var.project_id
+  project_id                 = "digitaldatamarketplace"
   name                       = "ddm-drone-pipeline"
   region                     = var.location
   logging_service            = "none"
