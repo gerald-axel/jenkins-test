@@ -3,8 +3,8 @@ type: kubernetes
 
 steps:
 - name: Spinning up gke
+  image: jmccann/drone-terraform:1
   settings:
-    image: jmccann/drone-terraform:1
     plan: false
   environment:
     TF_VAR_PROJECT_ID:
