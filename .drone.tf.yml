@@ -7,10 +7,10 @@ steps:
   settings:
     plan: false
     tf_version: 0.12.20
-  environment:
-    TF_VAR_PROJECT_ID:
+  vars:
+    project_id:
       from_secret: TF_VAR_PROJECT_ID
-    TF_VAR_GCP_JSON_KEY:
+    gcp_json_key:
       from_secret: TF_VAR_GCP_JSON_KEY
 
 ---
