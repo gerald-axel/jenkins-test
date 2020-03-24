@@ -14,6 +14,18 @@ steps:
 
 ---
 kind: secret
+name: TF_VAR_PROJECT_ID
+get:
+  path: drone-server-secrets
+  name: TF_VAR_PROJECT_ID
+---
+kind: secret
+name: TF_VAR_GCP_JSON_KEY
+get:
+  path: drone-server-secrets
+  name: TF_VAR_GCP_JSON_KEY
+---
+kind: secret
 name: HARBOR_PASSWORD
 get:
   path: drone-server-secrets
