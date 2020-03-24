@@ -3,11 +3,11 @@ variable "location" {
   default = "us-central1"
 }
 
-variable "GCP_JSON_KEY" {
+variable "gcp_json_key" {
   type    = string
 }
 
-variable "PROJECT_ID" {
+variable "project_id" {
   type    = string
 }
 
@@ -26,12 +26,12 @@ terraform {
 }
 
 provider "google" {
-  credentials = var.GCP_JSON_KEY
+  credentials = var.gcp_json_key
 }
 
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
-  project_id                 = var.PROJECT_ID
+  project_id                 = var.project_id
   name                       = "ddm-drone-pipeline"
   region                     = var.location
   logging_service            = "none"
