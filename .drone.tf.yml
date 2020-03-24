@@ -1,0 +1,38 @@
+kind: pipeline
+type: kubernetes
+
+steps:
+- name: Spinning up gke
+  settings:
+    image: jmccann/drone-terraform:1
+    plan: false
+  environment:
+    TF_VAR_PROJECT_ID:
+      from_secret: TF_VAR_PROJECT_ID
+    TF_VAR_GCP_JSON_KEY:
+      from_secret: TF_VAR_GCP_JSON_KEY
+
+---
+kind: secret
+name: HARBOR_PASSWORD
+get:
+  path: drone-server-secrets
+  name: HARBOR_PASSWORD
+---
+kind: secret
+name: HARBOR_USERNAME
+get:
+  path: drone-server-secrets
+  name: HARBOR_USERNAME
+---
+kind: secret
+name: KUBERNETES_TOKEN
+get:
+  path: drone-server-secrets
+  name: KUBERNETES_TOKEN
+---
+kind: secret
+name: KUBERNETES_STAGE_SERVER
+get:
+  path: drone-server-secrets
+  name: KUBERNETES_STAGE_SERVER
