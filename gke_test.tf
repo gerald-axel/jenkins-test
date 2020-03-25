@@ -1,14 +1,15 @@
+variable "project_id" {
+  type    = string
+}
+
+variable "gke_nodes" {
+  type    = number
+  default = 0
+}
+
 variable "location" {
   type    = string
   default = "us-central1"
-}
-
-variable "gcp_json_key" {
-  type    = string
-}
-
-variable "project_id" {
-  type    = string
 }
 
 variable "gke_pods_secondary_ips" {
@@ -23,17 +24,22 @@ variable "gke_services_secondary_ips" {
 
 terraform {
   required_version = ">= 0.12"
+  backend "gcs" {
+    bucket  = "ddm-drone-pipeline-state"
+    prefix  = "development"
+//    credentials = var.gcp_json_key
+  }
 }
 
 provider "google" {
-  credentials = var.gcp_json_key
+//  credentials = var.gcp_json_key
   project     = var.project_id
   region      = var.location
 }
 
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
-  project_id                 = "digitaldatamarketplace"
+  project_id                 = var.project_id
   name                       = "ddm-drone-pipeline"
   region                     = var.location
   logging_service            = "none"
@@ -55,16 +61,19 @@ module "gke" {
     {
       name               = "default-node-pool"
       machine_type       = "n1-standard-2"
-      min_count          = 1
-      max_count          = 1
       local_ssd_count    = 0
       disk_size_gb       = 100
       disk_type          = "pd-standard"
       image_type         = "COS"
+      autoscaling        = false
       auto_repair        = true
       auto_upgrade       = false
-      preemptible        = true
-      initial_node_count = 1
+      preemptible        = false
+      node_count         = var.gke_nodes
+      // Autoscaling variables disabled
+      //      min_count          = 1
+      //      max_count          = 1
+      //      initial_node_count = 0
     }
   ]
 }
